@@ -1,0 +1,67 @@
+.c_header-menu-title-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.c_menu-drawer__navigation .menu-drawer__menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.c_header-menu-title-en {
+    margin-top: 8px;
+    font-family: var(--font-bodoniModa-family);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;
+    color: rgba(var(--color-foreground), 1);
+}
+
+.c_header-menu-title-ja {
+    font-family: "Zen Kaku Gothic New";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -1.2px;
+    color: #4C4227;
+}
+
+@media screen and (max-width: 750px) {
+    .c_header-menu-lebel-1 {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .c_header-menu-title-wrapper {
+        padding: 0;
+    }
+
+    .js .menu-drawer__menu li {
+        margin-bottom: 0;
+    }
+
+    .summary.list-menu__item {
+        padding-right: 0 !important;
+    }
+
+    .menu-drawer summary.menu-drawer__menu-item {
+        padding-right: 0 !important;
+    }
+
+    .menu-drawer__navigation {
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .header {
+        padding: 0.5px 20px;
+    }
+}
