@@ -1,4 +1,10 @@
 :root {
-    --font-dmSans-family: "DM Sans", sans-serif;
-    --font-bodoniModa-family: "Bodoni Moda", serif;
+  --font-dmSans-family: "DM Sans", sans-serif;
+  --font-bodoniModa-family: "Bodoni Moda", serif;
+}
+
+.c_image {
+  width: 100%;
+  height: 100%;
+  vertical-align: bottom;
 }
