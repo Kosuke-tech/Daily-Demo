@@ -1,0 +1,9 @@
+{
+    "emmet.includeLanguages": {
+    "liquid": "html"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "files.associations": {
+    "*.liquid": "liquid"
+  }
+}

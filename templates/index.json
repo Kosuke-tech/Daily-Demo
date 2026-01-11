@@ -9,6 +9,18 @@
  */
 {
   "sections": {
+    "c_parallax_QxYMRp": {
+      "type": "c_parallax",
+      "name": "Custom:Parallax",
+      "settings": {
+        "img_pc": "shopify://shop_images/fv_pc.png",
+        "img_sp": "shopify://shop_images/fv_sp.png",
+        "overlay_pc": "shopify://shop_images/fv-overlay_pc.png",
+        "overlay_sp": "shopify://shop_images/fv-overlay_sp.png",
+        "decoration": "shopify://shop_images/pc.gif",
+        "textarea": "Daily, indulge in a soothing lather."
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -78,6 +90,7 @@
     }
   },
   "order": [
+    "c_parallax_QxYMRp",
     "image_banner",
     "featured_collection"
   ]
