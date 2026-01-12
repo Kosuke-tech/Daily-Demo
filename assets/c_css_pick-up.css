@@ -1,0 +1,30 @@
+.splide__arrow svg {
+    fill: transparent;
+    height: auto;
+    width: auto;
+}
+
+.splide__arrow {
+    background: #FFFBF7;
+    fill: #FFFBF7;
+    stroke-width: 0.6px;
+    stroke: #A38B51;
+    filter: drop-shadow(0 0 10px rgba(163, 139, 81, 0.20));
+    opacity: 1;
+}
+
+
+.splide__pagination {
+    bottom: -24px;
+}
+
+.splide__pagination__page.is-active {
+    background: #E09B24;
+    fill: #E09B24;
+}
+
+@media screen and (max-width: 750px) {
+    .c_pick-up__content {
+        margin-inline: -20px;
+    }
+}

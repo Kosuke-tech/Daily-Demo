@@ -1,0 +1,249 @@
+{{ 'c_css_pick-up.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: calc({{ section.settings.padding_top_pc }}px);
+      padding-bottom: calc({{ section.settings.padding_bottom_pc }}px);
+    }
+
+  @media screen and (max-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_sp }}px;
+        padding-bottom: {{ section.settings.padding_bottom_sp }}px;
+      }
+    }
+
+    #shopify-section-{{ section.id }} {
+      overflow: hidden;
+    }
+    #shopify-section-{{ section.id }} .splide__track {
+      overflow: visible;
+    }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}">
+  <div class="c_pick-up page-width">
+    <div class="c_section-head c_pick-up__head">
+      {% render 'c_section-title', title: section.settings.title, sub_title: section.settings.sub_title %}
+    </div>
+
+    <div class="splide c_splide c_pick-up__content splide-{{ section.id }}">
+      <div class="splide__track">
+        <ul class="splide__list">
+          {% for block in section.blocks %}
+            <li
+              class="splide__slide"
+              {{ shopify_attributes }}
+              data-block-id="{{ block.id }}"
+              data-block-index="{{ forloop.index0 }}"
+            >
+              {%- if block.settings.link != blank %}
+                <a href="{{ block.settings.link }}">
+              {%- endif -%}
+              <picture>
+                {% if block.settings.image_sp != blank %}
+                  <source srcset="{{ block.settings.image_sp | image_url: width: 800 }}" media="(max-width: 750px)">
+                {% endif %}
+                <img
+                  class="c_image"
+
+                  src="{{ block.settings.image_pc | image_url: width: 1200 }}"
+                  width="500"
+                  height="326"
+                  alt="{{ block.settings.image_pc.alt }}"
+                >
+              </picture>
+              {%- if block.settings.link != blank %}
+                </a>
+              {% endif -%}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="splide__arrows">
+        <button class="splide__arrow splide__arrow--prev">
+          {{ 'c_icon_arrow.svg' | inline_asset_content }}
+        </button>
+        <button class="splide__arrow splide__arrow--next">
+          {{ 'c_icon_arrow.svg' | inline_asset_content }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener( 'DOMContentLoaded', function() {
+
+    const splideOptions = {
+      type: 'loop',
+      rewind: true,
+      gap: {{ settings.spacing_grid_horizontal }},
+      perMove: 1,
+      focus: 'center',
+      omitEnd: true,
+      fixedWidth: 580,
+      autoplay: false,
+      breakpoints: {
+        750: {
+          fixedWidth: '100%',
+          gap: 0,
+        }
+      }
+    };
+
+    var splide = new Splide( '.splide-{{section.id}}', splideOptions );
+
+    splide.on('overflow', function(isOverflow) {
+      splide.go(0);
+      splide.options = {
+        type: isOverflow ? 'loop' : 'slide',
+        focus: isOverflow ? 'center' : undefined,
+        drag: isOverflow,
+        clones: isOverflow ? undefined : 0,
+        arrows: isOverflow
+      };
+    });
+
+    splide.mount();
+
+    {% if request.design_mode %}
+      document.addEventListener('shopify:section:load', function(e) {
+        if (e.detail.sectionId === '{{ section.id }}') {
+          if (splide) {
+            splide.destroy();
+          }
+          splide = new Splide('.splide-{{ section.id }}', splideOptions);
+
+          splide.on('overflow', function(isOverflow) {
+            splide.go(0);
+            splide.options = {
+              type: isOverflow ? 'loop' : 'slide',
+              focus: isOverflow ? 'center' : undefined,
+              drag: isOverflow,
+              clones: isOverflow ? undefined : 0,
+            };
+          });
+
+          splide.mount();
+        }
+      });
+      document.addEventListener('shopify:block:select', function(e) {
+        if (e.detail.sectionId === '{{ section.id }}') {
+          const blockId = e.detail.blockId;
+
+          const slides = Array.from(document.querySelectorAll('.splide-{{ section.id }} .splide__slide:not(.splide__slide--clone)'));
+
+          const targetSlide = slides.find(slide => slide.dataset.blockId === blockId);
+
+          if (targetSlide && splide) {
+            const blockIndex = parseInt(targetSlide.dataset.blockIndex);
+            splide.go(blockIndex);
+          }
+        }
+      });
+    {% endif %}
+  } );
+</script>
+
+{% schema %}
+{
+  "name": "Custom：Pick UP",
+  "settings": [
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "サブタイトル(日本語)",
+      "default": "サブタイトルを入力してください。"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "タイトル(英語)",
+      "default": "タイトルを入力してください。"
+    },
+    {
+      "type": "header",
+      "content": "デスクトップ"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_pc",
+      "label": "上部の余白(PC)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_pc",
+      "label": "下部の余白(PC)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "header",
+      "content": "モバイル"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_sp",
+      "label": "上部の余白(SP)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_sp",
+      "label": "下部の余白(SP )",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "画像",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_pc",
+          "label": "画像(PC)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_sp",
+          "label": "画像(SP)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "リンク先URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom:Pick UP"
+    }
+  ]
+}
+{% endschema %}
