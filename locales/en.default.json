@@ -1,4 +1,10 @@
 {
+  "custom": {
+    "product": {
+      "tax": "税込",
+      "details": "詳細へ"
+    }
+  },
   "general": {
     "password_page": {
       "login_form_heading": "Enter store using password:",
