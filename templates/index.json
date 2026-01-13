@@ -42,6 +42,57 @@
         "color_scheme": "scheme-51cd771e-e984-4131-b3f5-179b406e0019"
       }
     },
+    "c_featured_collection_ranking_tYFQh6": {
+      "type": "c_featured-collection-ranking",
+      "blocks": {
+        "collection_a4kUJe": {
+          "type": "collection",
+          "settings": {
+            "sub_title": "{{ block.settings.collection.title }}",
+            "title": "#{{ block.settings.collection.metafields.custom.title_sub.value }}",
+            "collection": "skin-care"
+          }
+        },
+        "collection_3WWjQG": {
+          "type": "collection",
+          "settings": {
+            "sub_title": "{{ block.settings.collection.title }}",
+            "title": "#{{ block.settings.collection.metafields.custom.title_sub.value }}",
+            "collection": "hair-care"
+          }
+        },
+        "collection_fygDKx": {
+          "type": "collection",
+          "settings": {
+            "sub_title": "{{ block.settings.collection.title }}",
+            "title": "#{{ block.settings.collection.metafields.custom.title_sub.value }}",
+            "collection": "hand-body"
+          }
+        }
+      },
+      "block_order": [
+        "collection_a4kUJe",
+        "collection_3WWjQG",
+        "collection_fygDKx"
+      ],
+      "name": "Custom:Ranking",
+      "settings": {
+        "sub_title": "ランキングから探す",
+        "title": "Ranking",
+        "products_to_show": 8,
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "padding_top_pc": 96,
+        "padding_bottom_pc": 96,
+        "padding_top_sp": 64,
+        "padding_bottom_sp": 64,
+        "color_scheme": ""
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -74,6 +125,7 @@
   "order": [
     "c_parallax_QxYMRp",
     "c_featured_collection_hhnjJQ",
+    "c_featured_collection_ranking_tYFQh6",
     "featured_collection"
   ]
 }

@@ -40,7 +40,16 @@
       assign ratio = 1
     endif
   -%}
-  <div class="card-wrapper product-card-wrapper underline-links-hover">
+
+  <div
+    class="
+      card-wrapper
+      product-card-wrapper
+      underline-links-hover
+      c_css_card-wrapper
+      {% if ranking %} c_card-wrapper--rankin g {% endif %}
+    "
+  >
     <div
       class="
         card card--{{ settings.card_style }}
@@ -126,41 +135,89 @@
           </div>
 
           <div class="card__badge {{ settings.badge_position }}">
-            {% assign badgeName = '' %}
+            {% if ranking and index != blank %}
+              {% comment %} ランキングバッジを表示 {% endcomment %}
+              <span class="c_card__ranking">
+                {% if index == 1 %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
+                    <circle cx="21.0998" cy="21.1" r="20.8" fill="#FFFBF7" stroke="url(#paint0_linear_4957_4190)" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                      <linearGradient id="paint0_linear_4957_4190" x1="18.4669" y1="-2.34765" x2="18.4669" y2="51.676" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#F7B413"/>
+                        <stop offset="0.684167" stop-color="#A67F21"/>
+                        <stop offset="0.984167" stop-color="#856414"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
 
-            {% for tag in card_product.tags %}
-              {% if tag contains 'label_' %}
-                {%- assign badgeName = tag | remove: 'label_' -%}
-                {%- break -%}
-              {% endif %}
-            {% endfor %}
+                {% elsif index == 2 %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
+                    <circle cx="21.0998" cy="21.1" r="20.8" fill="#FFFBF7" stroke="url(#paint0_linear_4957_4212)" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                      <linearGradient id="paint0_linear_4957_4212" x1="18.4669" y1="-2.34765" x2="18.4669" y2="51.676" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#C1B8AB"/>
+                        <stop offset="0.5" stop-color="#A6A39E"/>
+                        <stop offset="1" stop-color="#79684F"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
 
-            {%- if badgeName != '' -%}
-              {% comment %} badgeNameが空じゃない時は、新商品バッジを表示{% endcomment %}
-              <span
-                id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                class="badge badge--bottom-left color-{{ settings.custom_badge_color_scheme }}"
-              >
-                {{ badgeName }}
+                {% elsif index == 3 %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
+                    <circle cx="21.0998" cy="21.1" r="20.8" fill="#FFFBF7" stroke="url(#paint0_linear_4957_4215)" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                      <linearGradient id="paint0_linear_4957_4215" x1="18.4669" y1="-2.34765" x2="18.4669" y2="51.676" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#DA7A26"/>
+                        <stop offset="1" stop-color="#84421B"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                {% else %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
+                    <circle cx="21.0998" cy="21.1" r="20.8" fill="#FFFBF7" stroke="#9C9792" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                {% endif %}
+                <span class="c_card__ranking-number c_card__ranking-number--{index}">
+                  {{ index }}
+                </span>
               </span>
-            {%- elsif card_product.available == false -%}
-              {% comment %} 在庫がない時は、準備中バッジを表示 {% endcomment %}
-              <span
-                id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
-              >
-                {{- 'products.product.sold_out' | t -}}
-              </span>
+            {% else %}
+              {% assign badgeName = '' %}
 
-            {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
-              {% comment %} セール価格が設定されていて、かつ在庫がある時は、SALEバッジを表示 {% endcomment %}
-              <span
-                id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
-              >
-                {{- 'products.product.on_sale' | t -}}
-              </span>
-            {%- endif -%}
+              {% for tag in card_product.tags %}
+                {% if tag contains 'label_' %}
+                  {%- assign badgeName = tag | remove: 'label_' -%}
+                  {%- break -%}
+                {% endif %}
+              {% endfor %}
+
+              {%- if badgeName != '' -%}
+                {% comment %} badgeNameが空じゃない時は、新商品バッジを表示{% endcomment %}
+                <span
+                  id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
+                  class="badge badge--bottom-left color-{{ settings.custom_badge_color_scheme }}"
+                >
+                  {{ badgeName }}
+                </span>
+              {%- elsif card_product.available == false -%}
+                {% comment %} 在庫がない時は、準備中バッジを表示 {% endcomment %}
+                <span
+                  id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
+                  class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
+                >
+                  {{- 'products.product.sold_out' | t -}}
+                </span>
+
+              {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
+                {% comment %} セール価格が設定されていて、かつ在庫がある時は、SALEバッジを表示 {% endcomment %}
+                <span
+                  id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
+                  class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
+                >
+                  {{- 'products.product.on_sale' | t -}}
+                </span>
+              {%- endif -%}
+            {% endif %}
           </div>
         </div>
       </div>

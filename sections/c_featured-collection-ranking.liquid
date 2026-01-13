@@ -24,7 +24,7 @@
   <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
-{{ 'c_css_featured-collection.css' | asset_url | stylesheet_tag }}
+{{ 'c_css_featured-collection-ranking.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -53,22 +53,33 @@
     <div class="c_section-head c_featured-collection__head">
       {% render 'c_section-title', title: section.settings.title, sub_title: section.settings.sub_title %}
     </div>
+    <nav class="c_tabs-nav c_featured-collection__nav">
+      <ul class="c_tabs-list">
+        {% for block in section.blocks %}
+          {% if block.settings.title != blank %}
+            <li class="c_tab-item">
+              <button>
+                <span class="c_tab-title">{{ block.settings.title }}</span>
+                {% if block.settings.sub_title != blank %}
+                  <span class="c_tab-subtitle">
+                    {{ block.settings.sub_title }}
+                  </span>
+                {% endif %}
+              </button>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
 
-    <div class="splide c_splide c_featured-collection__content splide-{{ section.id }}">
-      <div class="splide__track">
-        <ul class="splide__list">
-          {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+    {% comment %} 商品のランキングコレクション {% endcomment %}
+    <div class="c_tabs-content c_featured-collection__content">
+      {% comment %} ブロックとしてコレクションをループで表示させたいので、商品カードをfor文で囲む。 {% endcomment %}
+      {% for block in section.blocks %}
+        <ul class="c_tab-panel c_featured-collection__list">
+          {%- for product in block.settings.collection.products limit: section.settings.products_to_show -%}
             {% comment %} schemaで指定したcollectionの中のproductをループで回す。かつ、products_to_showで指定した表示数に制限。 {% endcomment %}
-            {%- assign block = section.blocks[forloop.index0] -%}
-            <li
-              class="splide__slide"
-              {{ shopify_attributes }}
-              data-block-id="{{ block.id }}"
-              data-block-index="{{ forloop.index0 }}"
-            >
-              {%- if block.settings.link != blank %}
-                <a href="{{ block.settings.link }}">
-              {%- endif -%}
+            <li class="c_featured-collection__item">
               {% render 'c_card-product',
                 card_product: product,
                 media_aspect_ratio: section.settings.image_ratio,
@@ -80,100 +91,31 @@
                 section_id: section.id,
                 quick_add: section.settings.quick_add
               %}
-              {%- if block.settings.link != blank %}
-                </a>
-              {% endif -%}
             </li>
             {%- assign skip_card_product_styles = true -%}
           {% endfor %}
         </ul>
-      </div>
-      <div class="splide__arrows">
-        <button class="splide__arrow splide__arrow--prev">
-          {{ 'c_icon_arrow.svg' | inline_asset_content }}
-        </button>
-        <button class="splide__arrow splide__arrow--next">
-          {{ 'c_icon_arrow.svg' | inline_asset_content }}
-        </button>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </div>
 
-<script>
-  document.addEventListener( 'DOMContentLoaded', function() {
-
-    const splideOptions = {
-      type: 'slide',
-      gap: {{settings.spacing_grid_horizontal}},
-      perMove: 1,
-      omitEnd: true,
-      fixedWidth: 270,
-      pagination: false,
-      breakpoints: {
-        750: {
-          fixedWidth: 189,
-          gap: 24,
-        }
-      }
-    };
-
-    var splide = new Splide( '.splide-{{section.id}}', splideOptions );
-
-    splide.on('overflow', function(isOverflow) {
-      splide.go(0);
-      splide.options = {
-        arrows: isOverflow,
-        drag: isOverflow,
-        clones: isOverflow ? undefined : 0,
-      };
-    });
-
-    splide.mount();
-
-    {% if request.design_mode %}
-      document.addEventListener('shopify:section:load', function(e) {
-        if (e.detail.sectionId === '{{ section.id }}') {
-          if (splide) {
-            splide.destroy();
-          }
-          splide = new Splide('.splide-{{ section.id }}', splideOptions);
-
-          splide.on('overflow', function(isOverflow) {
-            splide.go(0);
-            splide.options = {
-              drag: isOverflow,
-              clones: isOverflow ? undefined : 0,
-            };
-          });
-
-          splide.mount();
-        }
-      });
-    {% endif %}
-  } );
-</script>
-
 {% schema %}
 {
-  "name": "Custom：New Arrival",
+  "name": "Custom：Ranking",
+  "max_blocks": 3,
   "settings": [
     {
       "type": "text",
       "id": "sub_title",
       "label": "サブタイトル(日本語)",
-      "default": "新商品から探す"
+      "default": "ランキングから探す"
     },
     {
       "type": "text",
       "id": "title",
       "label": "タイトル(英語)",
-      "default": "New arrival"
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "t:sections.featured-collection.settings.collection.label"
+      "default": "Ranking"
     },
     {
       "type": "range",
@@ -342,9 +284,34 @@
       "default": "scheme-1"
     }
   ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "コレクション",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "タイトル(英語)",
+          "default": "英語タブタイトル"
+        },
+        {
+          "type": "text",
+          "id": "sub_title",
+          "label": "サブタイトル(日本語)",
+          "default": "#"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:sections.featured-collection.settings.collection.label"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Custom:New Arrival"
+      "name": "Custom:Ranking"
     }
   ]
 }
