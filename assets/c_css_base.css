@@ -76,7 +76,7 @@
  ============================================*/
 
 /* 商品情報の上下の余白 */
-.c_card-wrapper .card__information {
+.card-wrapper .card__information {
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -110,9 +110,9 @@
 }
 
 
-/* -------------------------------------------
+/* --------------------
     カテゴリーラベル
- -------------------------------------------*/
+ ----------------------*/
 
 .c_card__label-list {
   display: flex;
@@ -172,7 +172,7 @@
 /* ------------------------------
   タイトル
 ------------------------------*/
-.c_card-wrapper .card__heading {
+.card-wrapper .card__heading {
   font-family: var(--font-dmSans-family);
   font-size: 16px;
   font-style: normal;
@@ -184,7 +184,7 @@
   background: #FFFBF7;
 }
 
-.c_card-wrapper .card__heading a {
+.card-wrapper .card__heading a {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -193,7 +193,7 @@
 }
 
 @media screen and (max-width: 750px) {
-  .c_card-wrapper .card__heading {
+  .card-wrapper .card__heading {
     font-size: 14px;
     letter-spacing: 0.56px;
     padding-top: 12px;
