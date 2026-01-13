@@ -21,3 +21,21 @@
         margin-top: 39px;
     }
 }
+
+.splide__arrow svg {
+    fill: initial;
+    height: auto;
+    width: auto;
+    /* background: #A38B51; */
+}
+
+/* .splide__arrow svg path {
+    display: none;
+} */
+
+.splide__arrow {
+    background: #FFFBF7;
+    height: auto;
+    opacity: 1;
+    width: auto;
+}

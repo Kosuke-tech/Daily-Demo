@@ -1,5 +1,3 @@
-{{ 'c_featured-collection.css' | asset_url | stylesheet_tag }}
-
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 
@@ -26,10 +24,12 @@
   <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
+{{ 'c_featured-collection.css' | asset_url | stylesheet_tag }}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    padding-top: {{ section.settings.padding_top_sp }}px;
+    padding-bottom: {{ section.settings.padding_bottom_sp }}px ;
   }
 
   @media screen and (min-width: 750px) {
@@ -38,47 +38,14 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-{%- endstyle -%}
 
-{%- liquid
-  assign products_to_display = section.settings.collection.all_products_count
+  #shopify-section-{{ section.id }} {
+    overflow: hidden;
+  }
 
-  if section.settings.collection.all_products_count > section.settings.products_to_show
-    assign products_to_display = section.settings.products_to_show
-    assign more_in_collection = true
-  endif
-
-  assign columns_mobile_int = section.settings.columns_mobile | plus: 0
-  assign show_mobile_slider = false
-  if section.settings.swipe_on_mobile and products_to_display > columns_mobile_int
-    assign show_mobile_slider = true
-  endif
-
-  assign show_desktop_slider = false
-  if section.settings.enable_desktop_slider and products_to_display > section.settings.columns_desktop
-    assign show_desktop_slider = true
-  endif
--%}
-
-{%- style -%}
-    .section-{{ section.id }}-padding {
-      padding-top: calc({{ section.settings.padding_top_pc }}px);
-      padding-bottom: calc({{ section.settings.padding_bottom_pc }}px);
-    }
-
-  @media screen and (max-width: 750px) {
-      .section-{{ section.id }}-padding {
-        padding-top: {{ section.settings.padding_top_sp }}px;
-        padding-bottom: {{ section.settings.padding_bottom_sp }}px;
-      }
-    }
-
-    #shopify-section-{{ section.id }} {
-      overflow: hidden;
-    }
-    #shopify-section-{{ section.id }} .splide__track {
-      overflow: visible;
-    }
+  #shopify-section-{{ section.id }} .splide__track {
+    overflow: visible;
+  }
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}">
@@ -138,17 +105,15 @@
 
     const splideOptions = {
       type: 'slide',
-      rewind: true,
-      gap: {{ settings.spacing_grid_horizontal }},
+      gap: {{settings.spacing_grid_horizontal}},
       perMove: 1,
-      focus: 'center',
       omitEnd: true,
-      fixedWidth: 580,
-      autoplay: false,
+      fixedWidth: 270,
+      pagination: false,
       breakpoints: {
         750: {
-          fixedWidth: '100%',
-          gap: 0,
+          fixedWidth: 189,
+          gap: 24,
         }
       }
     };
@@ -158,11 +123,9 @@
     splide.on('overflow', function(isOverflow) {
       splide.go(0);
       splide.options = {
-        {% comment %} type: isOverflow ? 'loop' : 'slide', {% endcomment %}
-        focus: isOverflow ? 'center' : undefined,
+        arrows: isOverflow,
         drag: isOverflow,
         clones: isOverflow ? undefined : 0,
-        arrows: isOverflow
       };
     });
 
@@ -179,28 +142,12 @@
           splide.on('overflow', function(isOverflow) {
             splide.go(0);
             splide.options = {
-              type: isOverflow ? 'loop' : 'slide',
-              focus: isOverflow ? 'center' : undefined,
               drag: isOverflow,
               clones: isOverflow ? undefined : 0,
             };
           });
 
           splide.mount();
-        }
-      });
-      document.addEventListener('shopify:block:select', function(e) {
-        if (e.detail.sectionId === '{{ section.id }}') {
-          const blockId = e.detail.blockId;
-
-          const slides = Array.from(document.querySelectorAll('.splide-{{ section.id }} .splide__slide:not(.splide__slide--clone)'));
-
-          const targetSlide = slides.find(slide => slide.dataset.blockId === blockId);
-
-          if (targetSlide && splide) {
-            const blockIndex = parseInt(targetSlide.dataset.blockIndex);
-            splide.go(blockIndex);
-          }
         }
       });
     {% endif %}
@@ -232,9 +179,9 @@
       "type": "range",
       "id": "products_to_show",
       "min": 2,
-      "max": 8,
+      "max": 25,
       "step": 1,
-      "default": 5,
+      "default": 4,
       "label": "t:sections.featured-collection.settings.products_to_show.label"
     },
     {
