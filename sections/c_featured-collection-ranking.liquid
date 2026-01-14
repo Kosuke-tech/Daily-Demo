@@ -32,12 +32,14 @@
     padding-bottom: {{ section.settings.padding_bottom_sp }}px ;
   }
 
+
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
+      padding-top: {{ section.settings.padding_top_pc }}px;
+      padding-bottom: {{ section.settings.padding_bottom_pc }}px;
     }
   }
+
 
   #shopify-section-{{ section.id }} {
     overflow: hidden;
@@ -58,7 +60,13 @@
         {% for block in section.blocks %}
           {% if block.settings.title != blank %}
             <li class="c_tab-item">
-              <button>
+              <button
+                data-tab="tab-{{ block.id }}"
+                class="
+                  c_tab-button
+                  {%if forloop.first %} is-active {% endif %}
+                "
+              >
                 <span class="c_tab-title">{{ block.settings.title }}</span>
                 {% if block.settings.sub_title != blank %}
                   <span class="c_tab-subtitle">
@@ -74,11 +82,12 @@
 
     {% comment %} 商品のランキングコレクション {% endcomment %}
     <div class="c_tabs-content c_featured-collection__content">
-      {% comment %} ブロックとしてコレクションをループで表示させたいので、商品カードをfor文で囲む。 {% endcomment %}
       {% for block in section.blocks %}
-        <ul class="c_tab-panel c_featured-collection__list">
+        <ul
+          data-tab="tab-{{ block.id }}"
+          class="c_tab-panel c_featured-collection__list {%if forloop.first %} is-active {% endif %}"
+        >
           {%- for product in block.settings.collection.products limit: section.settings.products_to_show -%}
-            {% comment %} schemaで指定したcollectionの中のproductをループで回す。かつ、products_to_showで指定した表示数に制限。 {% endcomment %}
             <li class="c_featured-collection__item">
               {% render 'c_card-product',
                 card_product: product,
@@ -89,7 +98,9 @@
                 show_rating: section.settings.show_rating,
                 skip_styles: skip_card_product_styles,
                 section_id: section.id,
-                quick_add: section.settings.quick_add
+                quick_add: section.settings.quick_add,
+                ranking: section.settings.ranking,
+                index: forloop.index
               %}
             </li>
             {%- assign skip_card_product_styles = true -%}
@@ -99,6 +110,30 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const tabs = document.querySelectorAll('#shopify-section-{{ section.id }} .c_tab-button');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const tabId = tab.getAttribute('data-tab');
+
+        document
+          .querySelectorAll(
+            '#shopify-section-{{ section.id }} .c_tab-button.is-active, #shopify-section-{{ section.id }} .c_tab-panel.is-active'
+          )
+          .forEach((el) => el.classList.remove('is-active'));
+
+        tab.classList.add('is-active');
+
+        const targetPanel = document.querySelector('.c_tab-panel[data-tab="' + tabId + '"]');
+
+        targetPanel.classList.add('is-active');
+      });
+    });
+  });
+</script>
 
 {% schema %}
 {
@@ -228,6 +263,12 @@
           "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_3"
         }
       ]
+    },
+    {
+      "type": "checkbox",
+      "id": "ranking",
+      "label": "ランキングの表示",
+      "default": true
     },
     {
       "type": "header",

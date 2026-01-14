@@ -78,6 +78,8 @@
                 show_rating: section.settings.show_rating,
                 skip_styles: skip_card_product_styles,
                 section_id: section.id,
+                ranking: section.settings.ranking,
+                index: forloop.index,
                 quick_add: section.settings.quick_add
               %}
               {%- if block.settings.link != blank %}
@@ -286,6 +288,11 @@
           "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_3"
         }
       ]
+    },
+    {
+      "type": "checkbox",
+      "id": "ranking",
+      "label": "ランキングの表示"
     },
     {
       "type": "header",

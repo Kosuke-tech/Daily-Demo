@@ -42,38 +42,38 @@
         "color_scheme": "scheme-51cd771e-e984-4131-b3f5-179b406e0019"
       }
     },
-    "c_featured_collection_ranking_tYFQh6": {
+    "c_featured_collection_ranking_7XxfWn": {
       "type": "c_featured-collection-ranking",
       "blocks": {
-        "collection_a4kUJe": {
+        "collection_6Q4e97": {
           "type": "collection",
           "settings": {
-            "sub_title": "{{ block.settings.collection.title }}",
-            "title": "#{{ block.settings.collection.metafields.custom.title_sub.value }}",
-            "collection": "skin-care"
+            "title": "{{ block.settings.collection.title }}",
+            "sub_title": "#{{ block.settings.collection.metafields.custom.title_sub.value }}",
+            "collection": "hand-body"
           }
         },
-        "collection_3WWjQG": {
+        "collection_WyPXLP": {
           "type": "collection",
           "settings": {
-            "sub_title": "{{ block.settings.collection.title }}",
-            "title": "#{{ block.settings.collection.metafields.custom.title_sub.value }}",
+            "title": "{{ block.settings.collection.title }}",
+            "sub_title": "#{{ block.settings.collection.metafields.custom.title_sub.value }}",
             "collection": "hair-care"
           }
         },
-        "collection_fygDKx": {
+        "collection_gJqyhC": {
           "type": "collection",
           "settings": {
-            "sub_title": "{{ block.settings.collection.title }}",
-            "title": "#{{ block.settings.collection.metafields.custom.title_sub.value }}",
-            "collection": "hand-body"
+            "title": "{{ block.settings.collection.title }}",
+            "sub_title": "#{{ block.settings.collection.metafields.custom.title_sub.value }}",
+            "collection": "skin-care"
           }
         }
       },
       "block_order": [
-        "collection_a4kUJe",
-        "collection_3WWjQG",
-        "collection_fygDKx"
+        "collection_6Q4e97",
+        "collection_WyPXLP",
+        "collection_gJqyhC"
       ],
       "name": "Custom:Ranking",
       "settings": {
@@ -86,6 +86,7 @@
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "standard",
+        "ranking": true,
         "padding_top_pc": 96,
         "padding_bottom_pc": 96,
         "padding_top_sp": 64,
@@ -125,7 +126,7 @@
   "order": [
     "c_parallax_QxYMRp",
     "c_featured_collection_hhnjJQ",
-    "c_featured_collection_ranking_tYFQh6",
+    "c_featured_collection_ranking_7XxfWn",
     "featured_collection"
   ]
 }
