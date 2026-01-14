@@ -23,6 +23,7 @@
 {%- unless skip_styles -%}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
+  {{ 'c_css_card-product.css' | asset_url | stylesheet_tag }}
 
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
@@ -47,7 +48,10 @@
       product-card-wrapper
       underline-links-hover
       c_css_card-wrapper
-      {% if ranking %} c_card-wrapper--rankin g {% endif %}
+      {% comment %} 商品カードを表示しているスニペットファイルの1番外側の親要素に条件分岐で、
+      rankingがtrueの場合は、c_card-wrapper--rankingクラスを追加し、indexにスタイルが当たるようにする。
+      {% endcomment %}
+      {% if ranking %} c_card-wrapper--ranking {% endif %}
     "
   >
     <div
@@ -289,7 +293,7 @@
                 </span>
               </p>
             {%- endif -%}
-            <div class="c_card__price">
+            <div class="c_card__price {% if ranking %} c_card__price--ranking {% endif %}">
               {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
               {%- if card_product.quantity_price_breaks_configured? -%}
                 {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
@@ -402,7 +406,7 @@
                         aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                         data-product-url="{{ card_product.url }}"
                       >
-                        {{ 'products.product.choose_options' | t }}
+                        {{ 'c_icon-quick-cart.svg' | inline_asset_content }}
                         {%- if horizontal_quick_add -%}
                           <span class="icon-wrap">
                             {{- 'icon-arrow.svg' | inline_asset_content -}}
@@ -463,13 +467,13 @@
                         >
                           <span>
                             {%- if card_product.selected_or_first_available_variant.available -%}
-                              {{ 'products.product.add_to_cart' | t }}
+                              {{ 'c_icon-quick-cart.svg' | inline_asset_content }}
                             {%- else -%}
-                              {{ 'products.product.sold_out' | t }}
+                              {{ 'c_icon-quick-cart.svg' | inline_asset_content }}
                             {%- endif -%}
                           </span>
                           <span class="sold-out-message hidden">
-                            {{ 'products.product.sold_out' | t }}
+                            {{ 'c_icon-quick-cart.svg' | inline_asset_content }}
                           </span>
                           {%- if horizontal_quick_add -%}
                             <span class="icon-wrap">

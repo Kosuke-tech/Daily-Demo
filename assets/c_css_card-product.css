@@ -1,0 +1,5 @@
+/* カードのはみ出る部分を強制消去 */
+.card--card,
+.card--standard .card__inner {
+    border-radius: 100px !important;
+}
