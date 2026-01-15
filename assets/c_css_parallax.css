@@ -1,7 +1,9 @@
 .c_parallax-section {
   /* ヘッダーの高さを差し引いた点で中の画像だけstickyにする。 */
   position: sticky;
+  /* position: fixed; */
   top: calc(var(--header-height, 0px));
+  z-index: -1;
 }
 
 .c_parallax__image {
@@ -30,7 +32,7 @@
   position: relative;
 }
 
-.c_parallax__imag .c_image {
+.c_parallax__image .c_image {
   position: absolute;
   inset: 0;
   width: 100%;

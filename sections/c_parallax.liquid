@@ -25,7 +25,10 @@
       <div class="c_parallax__image">
         <picture>
           {% if section.settings.img_sp != blank %}
-            <source srcset="{{ section.settings.img_sp | image_url: width: 800 }}" media="(max-width: 750px)">
+            <source
+              srcset="{{ section.settings.img_sp | image_url: width: 800 }}"
+              media="(max-width: 750px)"
+            >
           {% endif %}
           <img
             class="c_image"
@@ -40,11 +43,12 @@
   </div>
 {% endif %}
 
-{% if section.settings.img_pc != blank %}
+{% if section.settings.img_pc != blank and section.settings.decoration != blank %}
   <div class="c_parallax__image c_parallax__decoration">
     <div class="c_parallax__decoration__inner">
       <div class="c_parallax__decoration-image">
         <img
+          class="c_image"
           src="{{ section.settings.decoration | image_url: width: 800 }}"
           width="230"
           height="230"

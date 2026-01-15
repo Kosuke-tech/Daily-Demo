@@ -23,10 +23,19 @@
 }
 
 .splide__arrow svg {
-    fill: initial;
-    height: auto;
-    width: auto;
-    /* background: #A38B51; */
+    fill: #FFFBF7;
+    stroke-width: 0.6px;
+    stroke: #A38B51;
+    filter: drop-shadow(0 0 10px rgba(163, 139, 81, 0.20));
+    height: 42px;
+    width: 42px;
+}
+
+@media screen and (max-width: 750px) {
+    .splide__arrow svg {
+        height: 36px;
+        width: 36px;
+    }
 }
 
 /* .splide__arrow svg path {

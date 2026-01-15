@@ -28,6 +28,16 @@
   }
 }
 
+.page-width {
+  padding-inline: 20px;
+}
+
+@media screen and (max-width: 750px) {
+  .page-width {
+    padding-inline: 5rem;
+  }
+}
+
 
 /* ============================================
     セクションタイトル
