@@ -3,3 +3,11 @@
 .card--standard .card__inner {
     border-radius: 100px !important;
 }
+
+/* オブションボタンのborderの強制削除 */
+.button:after,
+.shopify-challenge__button:after,
+.customer button:after,
+.shopify-payment-button__button--unbranded:after {
+    box-shadow: none !important;
+}

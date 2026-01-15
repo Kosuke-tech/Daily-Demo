@@ -35,6 +35,7 @@
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
+        "ranking": false,
         "padding_top_pc": 96,
         "padding_bottom_pc": 96,
         "padding_top_sp": 64,
@@ -94,32 +95,52 @@
         "color_scheme": ""
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "c_parallax_Ahjatg": {
+      "type": "c_parallax",
+      "name": "Custom:Parallax",
       "settings": {
-        "collection": "all",
-        "products_to_show": 8,
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
+        "img_pc": "shopify://shop_images/parallax_pc.png",
+        "img_sp": "shopify://shop_images/parallax.sp.png",
+        "textarea": ""
+      }
+    },
+    "c_featured_collection_EkzBtP": {
+      "type": "c_featured-collection",
+      "name": "Custom:recommend",
+      "settings": {
+        "sub_title": "あなたにぴったりの時間",
+        "title": "Recommend",
+        "collection": "hand-body",
+        "products_to_show": 4,
+        "image_ratio": "square",
         "image_shape": "default",
-        "show_secondary_image": true,
+        "show_secondary_image": false,
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 44,
-        "padding_bottom": 36
+        "ranking": false,
+        "padding_top_pc": 96,
+        "padding_bottom_pc": 96,
+        "padding_top_sp": 64,
+        "padding_bottom_sp": 64,
+        "color_scheme": ""
+      }
+    },
+    "c_concept_AEapXc": {
+      "type": "c_concept",
+      "name": "Custom:Concept",
+      "settings": {
+        "sub_title": "私たちの想い",
+        "title": "Concept",
+        "textarea-1": "香りで癒し、肌が潤う。",
+        "textarea-2": "少しだけ、<br class=\"is-sp\">あなただけの癒しの時間を作りませんか？",
+        "textarea-3": "ラベンダーやシトラスの香りがふわりと広がり、まるで自然の中にいるようなリラックス感を味わえます。深呼吸をして、その豊かな香りを感じてみてくださいね。\n\n私たちの石鹸は、選りすぐりの植物由来の成分でつくられていて、あなたの肌をしっとりと包み込みます。洗い流した後も、柔らかな肌触りにきっと驚くはず。\n\n日常の慌ただしさから少し離れて、自分自身を大切にする時間を過ごしてください。\nDAILYの石鹸が、あなたの特別なリラックスタイムのお供になれれば幸いです。",
+        "image": "shopify://shop_images/soap.gif",
+        "padding_top_pc": 96,
+        "padding_bottom_pc": 96,
+        "padding_top_sp": 64,
+        "padding_bottom_sp": 64,
+        "color_scheme": ""
       }
     }
   },
@@ -127,6 +148,8 @@
     "c_parallax_QxYMRp",
     "c_featured_collection_hhnjJQ",
     "c_featured_collection_ranking_7XxfWn",
-    "featured_collection"
+    "c_parallax_Ahjatg",
+    "c_featured_collection_EkzBtP",
+    "c_concept_AEapXc"
   ]
 }
