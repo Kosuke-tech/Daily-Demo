@@ -1,0 +1,169 @@
+{{ 'c_css_news.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: calc({{ section.settings.padding_top_pc }}px);
+      padding-bottom: calc({{ section.settings.padding_bottom_pc }}px);
+    }
+
+  @media screen and (max-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_sp }}px;
+        padding-bottom: {{ section.settings.padding_bottom_sp }}px;
+      }
+    }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}">
+  <div class="c_news page-width">
+    <div class="c_section-head c_news__head">
+      {% render 'c_section-title', title: section.settings.title, sub_title: section.settings.sub_title %}
+    </div>
+
+    <div class="c_news__content">
+      <ul class="c_news__list">
+        {% for article in section.settings.blog.articles limit: section.settings.limit %}
+          <li class="c_news__item">
+            <a class="c_news__item-link" href="{{ article.url }}">
+              <div class="c_news__item-info">
+                <span class="c_news__item-date">{{ article.published_at | date: '%Y.%m.%d' }}</span>
+                {% for tag in article.tags %}
+                  {% if tag contains 'label_' %}
+                    <span class="c_news__item-category">{{ tag | remove: 'label_' }}</span>
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+              <h3 class="c_news__item-title">{{ article.title }}</h3>
+              {{ 'c_icon-arrow-news.svg' | inline_asset_content }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+      <div class="c_blog__button c_news__button">
+        <a
+          class="c_blog__button-link c_news__button-link"
+          href="{{ section.settings.blog.url }}"
+        >
+          {{ section.settings.button_text }}
+          {{ 'c_icon-arrow-news.svg' | inline_asset_content }}
+        </a>
+      </div>
+    </div>
+    {% if section.settings.image != blank %}
+      <div class="c_news__image">
+        <img
+          src="{{ section.settings.image | image_url: width:630 }}"
+          alt="{{ section.settings.image.alt | escape }}"
+          width="210"
+          height="210"
+          loading="lazy"
+        >
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom：News",
+  "settings": [
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "サブタイトル(日本語)",
+      "default": "お知らせ"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "タイトル(英語)",
+      "default": "NEWS"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "ブログを選択"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "表示記事数",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "ボタンテキスト",
+      "default": "全ての記事を見る"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "GIF画像"
+    },
+    {
+      "type": "header",
+      "content": "デスクトップ"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_pc",
+      "label": "上部の余白(PC)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_pc",
+      "label": "下部の余白(PC)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "header",
+      "content": "モバイル"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_sp",
+      "label": "上部の余白(SP)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_sp",
+      "label": "下部の余白(SP )",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom:News"
+    }
+  ]
+}
+{% endschema %}

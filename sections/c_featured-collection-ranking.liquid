@@ -121,7 +121,7 @@
 
         document
           .querySelectorAll(
-            '#shopify-section-{{ section.id }} .c_tab-button.is-active, #shopify-section-{{ section.id }} .c_tab-panel.is-active'
+            '#shopify-section-{{ section.id }} .c_tab-button.is-active, #shopify-section-{{ section.id }} .c_tab-panel.is-active',
           )
           .forEach((el) => el.classList.remove('is-active'));
 

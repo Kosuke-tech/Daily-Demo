@@ -17,40 +17,45 @@
 <div class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}">
   <div class="c_concept page-width">
     <div class="c_section-head c_concept__head">
-      {% render 'c_section-title', 
-        title: section.settings.title, 
-        sub_title: section.settings.sub_title ,
+      {% render 'c_section-title',
+        title: section.settings.title,
+        sub_title: section.settings.sub_title,
         vertical: true
-    %}
+      %}
     </div>
-     <div class="c_concept__content">
-    {% if section.settings.textarea-1 != blank %}
+    <div class="c_concept__content">
+      {% if section.settings['textarea-1'] != blank %}
         <p class="c_concept__content-item c_concept__content-item--heading">
-            {{ section.settings.textarea-1 | newline_to_br }}
+          {{ section.settings['textarea-1'] | newline_to_br }}
         </p>
-    {% endif %}
-    
-    {% if section.settings.textarea-2 != blank %}
+      {% endif %}
+
+      {% if section.settings['textarea-2'] != blank %}
         <p class="c_concept__content-item c_concept__content-item--catchphrase">
-            {{ section.settings.textarea-2 | newline_to_br }}
+          {{ section.settings['textarea-2'] | newline_to_br }}
         </p>
-    {% endif %}
-    
-    {% if section.settings.textarea-3 != blank %}
+      {% endif %}
+
+      {% if section.settings['textarea-3'] != blank %}
         <p class="c_concept__content-item c_concept__content-item--description">
-            {{ section.settings.textarea-3 | newline_to_br }}
+          {{ section.settings['textarea-3'] | newline_to_br }}
         </p>
-    {% endif %}
-    
-    {% if section.settings.image != blank %}
+      {% endif %}
+
+      {% if section.settings.image != blank %}
         <div class="c_concept__image">
-            <img src="{{ section.settings.image | image_url: width:630 }}" 
-                alt="{{ section.settings.image.alt | escape }}"
-                width="210" height="210" loading="lazy">
+          <img
+            src="{{ section.settings.image | image_url: width:630 }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            width="210"
+            height="210"
+            loading="lazy"
+          >
         </div>
-    {% endif %}
-</div>
+      {% endif %}
+    </div>
   </div>
+</div>
 
 {% schema %}
 {

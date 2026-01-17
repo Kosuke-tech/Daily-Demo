@@ -9,7 +9,6 @@
   vertical-align: bottom;
 }
 
-
 .is-pc {
   display: block !important;
 }
@@ -38,21 +37,19 @@
   }
 }
 
-
 /* ============================================
     セクションタイトル
  ============================================*/
 
 .c_section-head {
   margin-bottom: 40px;
-
 }
 
 .c_section-sub-title {
   display: flex;
   align-items: center;
   gap: 4px;
-  color: #4C4227;
+  color: #4c4227;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -92,14 +89,16 @@
 }
 
 /* 画像の調整 */
-.c_featured-collection__content:not(:has(.c_card-wrapper--ranking)) .card__inner,
-.c_featured-collection__content:not(:has(.c_card-wrapper--ranking)) .card__media {
+.c_featured-collection__content:not(:has(.c_card-wrapper--ranking))
+  .card__inner,
+.c_featured-collection__content:not(:has(.c_card-wrapper--ranking))
+  .card__media {
   border-bottom-right-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
 }
 
 .card__inner::after {
-  transition: background-color .3s ease;
+  transition: background-color 0.3s ease;
 }
 
 @media (hover: hover) {
@@ -119,7 +118,6 @@
   padding: 8.5px 17.5px;
 }
 
-
 /* --------------------
     カテゴリーラベル
  ----------------------*/
@@ -134,7 +132,7 @@
   padding-top: 16px;
   padding-left: 16px;
   padding-right: 16px;
-  background: #FFFBF7;
+  background: #fffbf7;
 }
 
 @media screen and (max-width: 990px) {
@@ -149,7 +147,7 @@
 /* ラベルデザイン */
 .c_card__label {
   display: inline-block;
-  color: #9C9792;
+  color: #9c9792;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -159,14 +157,14 @@
   padding-left: 7px;
   padding-right: 7px;
   text-decoration: none !important;
-  border: 0.8px solid #9C9792;
+  border: 0.8px solid #9c9792;
   border-radius: 999px;
   transition: border-color 0.3s ease;
 }
 
 @media (hover: hover) {
   .c_card__label:hover {
-    border-color: #E09B24;
+    border-color: #e09b24;
   }
 }
 
@@ -177,7 +175,6 @@
     padding-right: 2px;
   }
 }
-
 
 /* ------------------------------
   タイトル
@@ -191,7 +188,7 @@
   letter-spacing: 0.64px;
   padding: 16px;
   margin-bottom: 0;
-  background: #FFFBF7;
+  background: #fffbf7;
 }
 
 .card-wrapper .card__heading a {
@@ -213,12 +210,9 @@
   }
 }
 
-
-
 /* -------------------------------------------
     商品カードの価格表示
  -------------------------------------------*/
-
 
 /* ------------------------------
   金額
@@ -230,7 +224,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   row-gap: 10px;
-  background: #A38B51;
+  background: #a38b51;
   padding: 10px 16px;
   margin-top: 0 !important;
   border-radius: 0 0 8px 8px !important;
@@ -313,5 +307,58 @@
   .c_card__price--ranking .price {
     font-size: 16px;
     letter-spacing: 0.64px;
+  }
+}
+
+/* ==================================================
+  ブログ
+===================================================*/
+.c_blog__button-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  text-decoration: none;
+  color: #4c4227;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  width: fit-content;
+  margin-top: 32px;
+  margin-left: auto;
+  transition: color 0.3s ease;
+}
+@media screen and (max-width: 750px) {
+  .c_blog__button-link {
+    font-size: 14px;
+    margin-top: 40px;
+  }
+}
+.c_blog__button-link svg {
+  border: 1px solid #4c4227;
+  border-radius: 50%;
+  width: auto;
+  height: auto;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+.c_blog__button-link svg path {
+  transition: stroke 0.3s ease;
+}
+
+@media (hover: hover) {
+  .c_blog__button-link:hover {
+    color: #e09b24;
+  }
+
+  .c_blog__button-link:hover svg {
+    background-color: #fffbf7;
+    border-color: #e09b24;
+  }
+
+  .c_blog__button-link:hover svg path {
+    stroke: #e09b24;
   }
 }
