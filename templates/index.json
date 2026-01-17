@@ -142,6 +142,23 @@
         "padding_bottom_sp": 64,
         "color_scheme": ""
       }
+    },
+    "c_news_8yVfrz": {
+      "type": "c_news",
+      "name": "Custom:news",
+      "settings": {
+        "sub_title": "お知らせ",
+        "title": "NEWS",
+        "blog": "news",
+        "limit": 3,
+        "button_text": "全ての記事を見る",
+        "image": "shopify://shop_images/c_gif-news.gif",
+        "padding_top_pc": 96,
+        "padding_bottom_pc": 96,
+        "padding_top_sp": 64,
+        "padding_bottom_sp": 64,
+        "color_scheme": ""
+      }
     }
   },
   "order": [
@@ -150,6 +167,7 @@
     "c_featured_collection_ranking_7XxfWn",
     "c_parallax_Ahjatg",
     "c_featured_collection_EkzBtP",
-    "c_concept_AEapXc"
+    "c_concept_AEapXc",
+    "c_news_8yVfrz"
   ]
 }

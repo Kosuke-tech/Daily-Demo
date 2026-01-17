@@ -1,0 +1,161 @@
+{{ 'c_css_featured-blog.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: calc({{ section.settings.padding_top_pc }}px);
+      padding-bottom: calc({{ section.settings.padding_bottom_pc }}px);
+    }
+
+  @media screen and (max-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_sp }}px;
+        padding-bottom: {{ section.settings.padding_bottom_sp }}px;
+      }
+    }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}">
+  <div class="c_featured-blog page-width">
+    <div class="c_section-head c_featured-blog__head">
+      {% render 'c_section-title',
+        title: section.settings.title,
+        sub_title: section.settings.sub_title,
+        vertical: true
+      %}
+    </div>
+
+    <div class="c_featured-blog__content">
+      {% if section.settings['textarea-1'] != blank %}
+        <p class="c_featured-blog__content-item c_featured-blog__content-item--heading">
+          {{ section.settings['textarea-1'] | newline_to_br }}
+        </p>
+      {% endif %}
+
+      {% if section.settings['textarea-2'] != blank %}
+        <p class="c_featured-blog__content-item c_featured-blog__content-item--catchphrase">
+          {{ section.settings['textarea-2'] | newline_to_br }}
+        </p>
+      {% endif %}
+
+      {% if section.settings['textarea-3'] != blank %}
+        <p class="c_featured-blog__content-item c_featured-blog__content-item--description">
+          {{ section.settings['textarea-3'] | newline_to_br }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.image != blank %}
+        <div class="c_featured-blog__image">
+          <img
+            src="{{ section.settings.image | image_url: width:630 }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            width="210"
+            height="210"
+            loading="lazy"
+          >
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom：Blog",
+  "settings": [
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "サブタイトル(日本語)",
+      "default": "お知らせ"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "タイトル(英語)",
+      "default": "News"
+    },
+    {
+      "type": "textarea",
+      "id": "textarea-1",
+      "label": "テキスト-1",
+      "default": "香りで癒し、肌が潤う。"
+    },
+    {
+      "type": "textarea",
+      "id": "textarea-2",
+      "label": "テキスト-2",
+      "default": "少しだけ、あなただけの癒しの時間を作りませんか？"
+    },
+    {
+      "type": "textarea",
+      "id": "textarea-3",
+      "label": "テキスト-3",
+      "default": "テキストテキスト"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "画像"
+    },
+    {
+      "type": "header",
+      "content": "デスクトップ"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_pc",
+      "label": "上部の余白(PC)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_pc",
+      "label": "下部の余白(PC)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "header",
+      "content": "モバイル"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_sp",
+      "label": "上部の余白(SP)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_sp",
+      "label": "下部の余白(SP )",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom:Blog"
+    }
+  ]
+}
+{% endschema %}
