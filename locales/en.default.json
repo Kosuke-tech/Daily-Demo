@@ -3,6 +3,9 @@
     "product": {
       "tax": "税込",
       "details": "詳細へ"
+    },
+    "footer": {
+      "newsletter_btn": "送信する"
     }
   },
   "general": {

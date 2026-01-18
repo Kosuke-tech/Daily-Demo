@@ -17,41 +17,52 @@
 <div class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}">
   <div class="c_featured-blog page-width">
     <div class="c_section-head c_featured-blog__head">
-      {% render 'c_section-title',
-        title: section.settings.title,
-        sub_title: section.settings.sub_title,
-        vertical: true
-      %}
+      {% render 'c_section-title', title: section.settings.title, sub_title: section.settings.sub_title %}
     </div>
 
     <div class="c_featured-blog__content">
-      {% if section.settings['textarea-1'] != blank %}
-        <p class="c_featured-blog__content-item c_featured-blog__content-item--heading">
-          {{ section.settings['textarea-1'] | newline_to_br }}
-        </p>
-      {% endif %}
+      <ul class="c_featured-blog__list">
+        {% for article in section.settings.blog.articles limit: section.settings.limit %}
+          <li class="c_featured-blog__item">
+            <a class="c_featured-blog__item-link" href="{{ article.url }}">
+              <div class="c_featured-blog__item-image">
+                {% if article.image != blank %}
+                  <img
+                    src="{{ article.image | image_url: width: 540 }}"
+                    alt="{{ article.image.alt }}"
+                    width="270"
+                    height="270"
+                  >
+                {% endif %}
+              </div>
 
-      {% if section.settings['textarea-2'] != blank %}
-        <p class="c_featured-blog__content-item c_featured-blog__content-item--catchphrase">
-          {{ section.settings['textarea-2'] | newline_to_br }}
-        </p>
-      {% endif %}
+              <div class="c_featured-blog__item-info">
+                <h3 class="c_featured-blog__item-title">{{ article.title }}</h3>
+                {% if section.settings.date_show %}
+                  <span class="c_featured-blog__shop-info">
+                    {{ article.published_at | date: '%Y.%m.%d' }}
+                  </span>
+                {% endif %}
 
-      {% if section.settings['textarea-3'] != blank %}
-        <p class="c_featured-blog__content-item c_featured-blog__content-item--description">
-          {{ section.settings['textarea-3'] | newline_to_br }}
-        </p>
-      {% endif %}
-
-      {% if section.settings.image != blank %}
-        <div class="c_featured-blog__image">
-          <img
-            src="{{ section.settings.image | image_url: width:630 }}"
-            alt="{{ section.settings.image.alt | escape }}"
-            width="210"
-            height="210"
-            loading="lazy"
+                {% if article.metafields.custom.address != blank %}
+                  <div class="c_featured-blog__shop-info">
+                    {{ article.metafields.custom.address | newline_to_br }}
+                  </div>
+                {% endif %}
+              </div>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+      {% if section.settings.limit < section.settings.blog.articles_count %}
+        <div class="c_blog__button c_featured-blog__button">
+          <a
+            class="c_blog__button-link c_featured-blog__button-link"
+            href="{{ section.settings.blog.url }}"
           >
+            {{ section.settings.button_text }}
+            {{ 'c_icon-arrow-featured-blog.svg' | inline_asset_content }}
+          </a>
         </div>
       {% endif %}
     </div>
@@ -66,36 +77,39 @@
       "type": "text",
       "id": "sub_title",
       "label": "サブタイトル(日本語)",
-      "default": "お知らせ"
+      "default": "店舗情報"
     },
     {
       "type": "text",
       "id": "title",
       "label": "タイトル(英語)",
-      "default": "News"
+      "default": "Shop"
     },
     {
-      "type": "textarea",
-      "id": "textarea-1",
-      "label": "テキスト-1",
-      "default": "香りで癒し、肌が潤う。"
+      "type": "blog",
+      "id": "blog",
+      "label": "ブログを選択"
     },
     {
-      "type": "textarea",
-      "id": "textarea-2",
-      "label": "テキスト-2",
-      "default": "少しだけ、あなただけの癒しの時間を作りませんか？"
+      "type": "range",
+      "id": "limit",
+      "label": "表示記事数",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 4
     },
     {
-      "type": "textarea",
-      "id": "textarea-3",
-      "label": "テキスト-3",
-      "default": "テキストテキスト"
+      "type": "checkbox",
+      "id": "date_show",
+      "label": "日付を表示する",
+      "default": false
     },
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "画像"
+      "type": "text",
+      "id": "button_text",
+      "label": "ボタンテキスト",
+      "default": "全ての記事を見る"
     },
     {
       "type": "header",

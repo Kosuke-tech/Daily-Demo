@@ -14,29 +14,38 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "newsletter_D6e6CX": {
+          "type": "newsletter",
+          "settings": {
+            "newsletter_heading": "ニュースレターに登録する",
+            "btn_text": "お問い合せフォームはこちら",
+            "url": "shopify://pages/contact"
+          }
+        },
         "link_list_KGUdmj": {
           "type": "link_list",
           "settings": {
-            "heading": "",
+            "heading": "PRODUCT",
             "menu": "product"
           }
         },
         "link_list_gtkwVH": {
           "type": "link_list",
           "settings": {
-            "heading": "",
+            "heading": "GUIDE",
             "menu": "guide"
           }
         },
         "link_list_6zNDtD": {
           "type": "link_list",
           "settings": {
-            "heading": "",
+            "heading": "POLICY",
             "menu": "policy"
           }
         }
       },
       "block_order": [
+        "newsletter_D6e6CX",
         "link_list_KGUdmj",
         "link_list_gtkwVH",
         "link_list_6zNDtD"
@@ -44,7 +53,7 @@
       "settings": {
         "color_scheme": "scheme-5",
         "newsletter_enable": false,
-        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_heading": "ニュースレターに登録",
         "enable_follow_on_shop": false,
         "show_social": false,
         "enable_country_selector": false,
