@@ -151,8 +151,42 @@
         "title": "NEWS",
         "blog": "news",
         "limit": 3,
-        "button_text": "全ての記事を見る",
+        "button_text": "全てのニュース記事を見る",
         "image": "shopify://shop_images/c_gif-news.gif",
+        "padding_top_pc": 96,
+        "padding_bottom_pc": 96,
+        "padding_top_sp": 64,
+        "padding_bottom_sp": 64,
+        "color_scheme": ""
+      }
+    },
+    "c_featured_blog_rNjrWg": {
+      "type": "c_featured-blog",
+      "name": "Custom:Blog",
+      "settings": {
+        "sub_title": "店舗情報",
+        "title": "Shop",
+        "blog": "shop",
+        "limit": 4,
+        "date_show": false,
+        "button_text": "全てのブログ記事を見る",
+        "padding_top_pc": 96,
+        "padding_bottom_pc": 96,
+        "padding_top_sp": 64,
+        "padding_bottom_sp": 64,
+        "color_scheme": "scheme-51cd771e-e984-4131-b3f5-179b406e0019"
+      }
+    },
+    "c_featured_blog_UcVVLK": {
+      "type": "c_featured-blog",
+      "name": "Custom:Blog",
+      "settings": {
+        "sub_title": "コラム",
+        "title": "Column",
+        "blog": "column",
+        "limit": 4,
+        "date_show": true,
+        "button_text": "全ての記事を見る",
         "padding_top_pc": 96,
         "padding_bottom_pc": 96,
         "padding_top_sp": 64,
@@ -168,6 +202,8 @@
     "c_parallax_Ahjatg",
     "c_featured_collection_EkzBtP",
     "c_concept_AEapXc",
-    "c_news_8yVfrz"
+    "c_news_8yVfrz",
+    "c_featured_blog_rNjrWg",
+    "c_featured_blog_UcVVLK"
   ]
 }
