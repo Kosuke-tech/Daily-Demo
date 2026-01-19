@@ -110,7 +110,6 @@
 
                 {%- case block.type -%}
                   {%- when 'newsletter' -%}
-                    {% comment %}  {% endcomment %}
                     <div class="footer-block__newsletter">
                       {%- if block.settings.newsletter_heading != blank -%}
                         <h2 class="footer-block__heading inline-richtext">
@@ -182,7 +181,29 @@
                     {% if block.settings.btn_text != blank %}
                       <div class="c_footer__newsletter-link--wrapper">
                         <a href="{{ block.settings.url }}" class="c_footer__newsletter-link">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="39"
+                            height="39"
+                            viewBox="0 0 39 39"
+                            fill="none"
+                          >
+                            <path d="M32.3326 32.4377H6.85008C4.67013 32.4377 2.89453 30.8613 2.89453 28.9216V10.0785C2.89453 8.13886 4.67013 6.5625 6.85008 6.5625H32.3326C34.5126 6.5625 36.2882 8.13886 36.2882 10.0785V28.9216C36.2882 30.8613 34.5126 32.4377 32.3326 32.4377ZM6.85008 7.34189C5.15359 7.34189 3.77354 8.56958 3.77354 10.0785V28.9216C3.77354 30.4306 5.15359 31.6583 6.85008 31.6583H32.3326C34.0291 31.6583 35.4091 30.4306 35.4091 28.9216V10.0785C35.4091 8.56958 34.0291 7.34189 32.3326 7.34189H6.85008Z" fill="#282315"/>
+                            <path d="M6.14729 27.9715C6.03594 27.9715 5.92166 27.9335 5.83669 27.8573C5.66381 27.7049 5.66381 27.4559 5.83669 27.3035L12.9391 20.9893C13.112 20.8369 13.3903 20.8369 13.5603 20.9893C13.7331 21.1416 13.7331 21.3907 13.5603 21.543L6.45785 27.8573C6.37288 27.9335 6.25863 27.9715 6.14729 27.9715Z" fill="#282315"/>
+                            <path d="M33.0358 27.9715C32.9245 27.9715 32.8102 27.9335 32.7252 27.8573L25.6257 21.543C25.4529 21.3907 25.4529 21.1416 25.6257 20.9893C25.7986 20.8369 26.077 20.8369 26.2469 20.9893L33.3464 27.3035C33.5193 27.4559 33.5193 27.7049 33.3464 27.8573C33.2614 27.9335 33.1472 27.9715 33.0358 27.9715Z" fill="#282315"/>
+                            <path d="M19.5922 22.516C18.5726 22.516 17.6145 22.1644 16.8995 21.5257L5.83864 11.6954C5.66577 11.543 5.66577 11.294 5.83864 11.1416C6.01151 10.9893 6.28986 10.9893 6.4598 11.1416L17.5207 20.9719C18.0715 21.4612 18.807 21.7337 19.5922 21.7337C20.3804 21.7337 21.1159 21.4641 21.6696 20.9719L32.7276 11.1416C32.9005 10.9893 33.1788 10.9893 33.3488 11.1416C33.5216 11.294 33.5216 11.543 33.3488 11.6954L22.2908 21.5257C21.5729 22.1644 20.6148 22.516 19.5922 22.516Z" fill="#282315"/>
+                          </svg>
                           {{ block.settings.btn_text }}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                          >
+                            <circle cx="12" cy="12" r="11.75" transform="matrix(-1 0 0 1 24 0)" stroke="#9C9792" stroke-width="0.5"/>
+                            <path d="M10.9996 8.46447L14.5352 12L10.9996 15.5355" stroke="#9C9792" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
                         </a>
                       </div>
                     {% endif %}
@@ -280,7 +301,9 @@
           {%- if section.settings.newsletter_enable -%}
             <div class="footer-block__newsletter">
               {%- if section.settings.newsletter_heading != blank -%}
-                <h2 class="footer-block__heading inline-richtext">{{ section.settings.newsletter_heading }}</h2>
+                <h2 class="footer-block__heading inline-richtext">
+                  {{ section.settings.newsletter_heading }}
+                </h2>
               {%- endif -%}
               {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
                 <input type="hidden" name="contact[tags]" value="newsletter">
