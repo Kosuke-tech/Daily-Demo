@@ -1,0 +1,112 @@
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: calc({{ section.settings.padding_top_pc }}px);
+      padding-bottom: calc({{ section.settings.padding_bottom_pc }}px);
+    }
+
+  @media screen and (max-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_sp }}px;
+        padding-bottom: {{ section.settings.padding_bottom_sp }}px;
+      }
+    }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}">
+  {% if section.settings.img_pc != blank %}
+    <div class="c_image-section">
+      <picture>
+        {% if section.settings.img_sp != blank %}
+          <source
+            srcset="{{ section.settings.img_sp | image_url: width: 800 }}"
+            media="(max-width: 750px)"
+          >
+        {% endif %}
+        <img
+          class="c_image"
+          src="{{ section.settings.img_pc | image_url: width: 3840 }}"
+          width="1920"
+          height="800"
+          alt="{{ section.settings.img_pc.alt }}"
+        >
+      </picture>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Custom：Image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "img_pc",
+      "label": "画像(PC)"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_sp",
+      "label": "画像(SP)"
+    },
+    {
+      "type": "header",
+      "content": "デスクトップ"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_pc",
+      "label": "上部の余白(PC)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_pc",
+      "label": "下部の余白(PC)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "header",
+      "content": "モバイル"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_sp",
+      "label": "上部の余白(SP)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_sp",
+      "label": "下部の余白(SP )",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom:Image"
+    }
+  ]
+}
+{% endschema %}
