@@ -9,18 +9,25 @@
  */
 {
   "sections": {
-    "banner": {
-      "type": "main-collection-banner",
+    "c_image_fVjn8j": {
+      "type": "c_image",
+      "name": "Custom:Image",
       "settings": {
-        "show_collection_description": true,
-        "show_collection_image": false,
-        "color_scheme": "scheme-1"
+        "img_pc": "{{ collection.image }}",
+        "img_sp": "{{ collection.metafields.custom.fv_sv.value }}",
+        "padding_top_pc": 0,
+        "padding_bottom_pc": 0,
+        "padding_top_sp": 0,
+        "padding_bottom_sp": 0,
+        "color_scheme": ""
       }
     },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
-        "products_per_page": 16,
+        "sub_title": "{{ collection.metafields.custom.title_sub.value }}",
+        "title": "{{ collection.title }}",
+        "products_per_page": 8,
         "columns_desktop": 4,
         "columns_mobile": "2",
         "color_scheme": "scheme-1",
@@ -33,13 +40,25 @@
         "enable_filtering": false,
         "filter_type": "horizontal",
         "enable_sorting": true,
-        "padding_top": 32,
-        "padding_bottom": 64
+        "padding_top_pc": 64,
+        "padding_bottom_pc": 64,
+        "padding_top_sp": 32,
+        "padding_bottom_sp": 64
+      }
+    },
+    "banner": {
+      "type": "main-collection-banner",
+      "disabled": true,
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-1"
       }
     }
   },
   "order": [
-    "banner",
-    "product-grid"
+    "c_image_fVjn8j",
+    "product-grid",
+    "banner"
   ]
 }
