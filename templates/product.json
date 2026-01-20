@@ -36,16 +36,14 @@
         },
         "price": {
           "type": "price",
-          "settings": {}
-        },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "settings": {}
+          "settings": {
+            "richtext": "<p><a href=\"/pages/contact\" title=\"Contact\">配送料</a>は購入手続き時に計算されます。</p>"
+          }
         },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": true,
+            "show_dynamic_checkout": false,
             "show_gift_card_recipient": true
           }
         }
@@ -56,7 +54,6 @@
         "description",
         "variant_picker",
         "price",
-        "quantity_selector",
         "buy_buttons"
       ],
       "settings": {
@@ -71,8 +68,34 @@
         "image_zoom": "lightbox",
         "hide_variants": true,
         "enable_video_looping": false,
-        "padding_top": 48,
-        "padding_bottom": 96
+        "padding_top_pc": 48,
+        "padding_bottom_pc": 96,
+        "padding_top_sp": 24,
+        "padding_bottom_sp": 24
+      }
+    },
+    "c_product_point_eFCKbU": {
+      "type": "c_product-point",
+      "blocks": {
+        "point_nwCAcR": {
+          "type": "point",
+          "repeater": "{{ product.metafields.custom.points.value }}",
+          "settings": {
+            "title": "{{ block.repeater.point.value }}"
+          }
+        }
+      },
+      "block_order": [
+        "point_nwCAcR"
+      ],
+      "name": "Custom:Recommend-Point",
+      "settings": {
+        "title": "こんな方におすすめ",
+        "padding_top_pc": 48,
+        "padding_bottom_pc": 48,
+        "padding_top_sp": 0,
+        "padding_bottom_sp": 40,
+        "color_scheme": "scheme-c0b86199-3110-49c1-a759-1b5957770c6b"
       }
     },
     "collapsible_content_mgH4at": {
@@ -123,8 +146,10 @@
         "open_first_collapsible_row": false,
         "image_ratio": "adapt",
         "desktop_layout": "image_second",
-        "padding_top": 48,
-        "padding_bottom": 48
+        "padding_top_pc": 48,
+        "padding_bottom_pc": 48,
+        "padding_top_sp": 40,
+        "padding_bottom_sp": 40
       }
     },
     "related-products": {
@@ -145,11 +170,35 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "c_featured_collection_4xJBKg": {
+      "type": "c_featured-collection",
+      "name": "Custom:New Arrival",
+      "settings": {
+        "sub_title": "あなたにぴったりの商品",
+        "title": "Recommend",
+        "collection": "hand-body",
+        "products_to_show": 5,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "ranking": false,
+        "padding_top_pc": 96,
+        "padding_bottom_pc": 96,
+        "padding_top_sp": 64,
+        "padding_bottom_sp": 64,
+        "color_scheme": "scheme-51cd771e-e984-4131-b3f5-179b406e0019"
+      }
     }
   },
   "order": [
     "main",
+    "c_product_point_eFCKbU",
     "collapsible_content_mgH4at",
-    "related-products"
+    "related-products",
+    "c_featured_collection_4xJBKg"
   ]
 }
