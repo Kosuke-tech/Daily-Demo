@@ -122,6 +122,26 @@
   }
 }
 
+.slider-button .svg-wrapper {
+  display: grid;
+  place-content: center;
+}
+@media screen and (max-width: 750px) {
+  .slider-button .svg-wrapper {
+    width: auto;
+    height: auto;
+  }
+
+  .thumbnail-slider {
+    padding-inline: 20px !important;
+    margin-bottom: 24px;
+  }
+}
+.slider-button .svg-wrapper .svg {
+  width: 12px;
+  height: 12px;
+}
+
 .c_product-media-arrow {
   display: flex;
 }
@@ -207,8 +227,9 @@
 .product-form__input--pill input[type="radio"]:checked + label {
   background-color: #fff;
   color: #282315;
-  border: 0.6px solid #e09b24;
+  border: 0.6px solid #a38b51;
   box-shadow: 0 0 0 1.4px #e09b24;
+  border-radius: 8px;
 }
 
 .product-form__input--pill input[type="radio"].disabled + label {
@@ -217,6 +238,11 @@
   background: #b2a18f;
   box-shadow: none;
   text-decoration: none;
+}
+
+/* バリエーションボタンの角丸を小さくして四角くする */
+.product-form__input--pill input[type="radio"] + label {
+  border-radius: 8px;
 }
 
 /* ------------------------------
