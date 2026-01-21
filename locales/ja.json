@@ -6,6 +6,11 @@
     },
     "footer": {
       "newsletter_btn": "送信する"
+    },
+    "contact": {
+      "orderNumber": "ご注文番号（わかる場合） ",
+      "text": "2営業日以内（土日祝を除く）に返信をいたします。",
+      "required-text": "は必須事項です。"
     }
   },
   "general": {
@@ -258,14 +263,14 @@
     },
     "contact": {
       "form": {
-        "name": "名前",
-        "email": "メール",
+        "name": "お名前",
+        "email": "メールアドレス",
         "phone": "電話番号",
         "comment": "コメント",
         "send": "送信する",
         "post_success": "お問い合わせいただきありがとうございます。早急に返信いたします。",
         "error_heading": "以下を確認してください。",
-        "title": "お問い合わせフォーム"
+        "title": "お問い合わせ内容"
       }
     },
     "404": {

@@ -6,6 +6,11 @@
     },
     "footer": {
       "newsletter_btn": "送信する"
+    },
+    "contact": {
+      "orderNumber": "ご注文番号（わかる場合） ",
+      "text": "2営業日以内（土日祝を除く）に返信をいたします。",
+      "required-text": "は必須事項です。"
     }
   },
   "general": {
